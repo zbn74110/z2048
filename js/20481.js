@@ -1,7 +1,7 @@
 // 有动画版
 
 // 设置动画时长，毫秒为单位
-var animationSpeed = 1000;
+var animationSpeed = 100;
 var transitionDuration = (animationSpeed/1000)+'s'
 
 // 设置四个数组，分别对应上下左右移动时元素移动的顺序
