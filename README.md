@@ -1,5 +1,7 @@
-2048 [gitee](https://gitee.com/zbn74110_0/z2048) [github](https://github.com/zbn74110/z2048)
+2048 
 ===
+[gitee](https://gitee.com/zbn74110_0/z2048) [github](https://github.com/zbn74110/z2048)
+---
 介绍
 ---
 这是一个原生JS实现的2048小游戏，希望大家喜欢
