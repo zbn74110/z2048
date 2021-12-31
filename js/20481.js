@@ -35,17 +35,23 @@ setColor()
 
 // 监听键盘操作
 document.body.addEventListener("keypress",function(e){
+	move = false;
+	console.log(e.keyCode)
 	switch(e.keyCode){
+		case 87:
 		case 119:
 		// 移动棋盘
 			addNum(U);
 			break;
+		case 83:
 		case 115:
 			addNum(D)
 			break;
+		case 65:
 		case 97:
 			addNum(L)
 			break;
+		case 68:
 		case 100:
 			addNum(R)
 			break;
@@ -74,7 +80,7 @@ document.body.addEventListener("keypress",function(e){
 // 移动棋盘，根据移动方向不同，传入不同的顺序数组
 function addNum(moveOrder){
 	// 在移动前设置move为假
-	move = false;
+	
 	// 从因为最靠边的4个格子不会移动，所以从第五个格子开始遍历
 	for (let i = 4; i < moveOrder.length; i++) {
 		// 根据顺序数组，得到要移动的格子
