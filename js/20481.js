@@ -1,5 +1,5 @@
 // 有动画版
-
+// Coding by 泽比纳 2022-01-04
 // 设置动画时长，毫秒为单位
 var animationSpeed = 100;
 var transitionDuration = (animationSpeed/1000)+'s'
@@ -33,10 +33,12 @@ setScore()
 // 更新颜色显示
 setColor()
 
+// 设置当前最大值
+var maxNum = 0;
+
 // 监听键盘操作
 document.body.addEventListener("keypress",function(e){
 	move = false;
-	console.log(e.keyCode)
 	switch(e.keyCode){
 		case 87:
 		case 119:
@@ -60,8 +62,11 @@ document.body.addEventListener("keypress",function(e){
 	}
 	// 设置延迟，等待动画完成后再进行操作
 	setTimeout(function(){
+		
+		nullElements = getEmptyElements();
+		
 		// 如果棋盘移动过，则生成下一个数字
-		if(move == true){setNum()}
+		if(move == true){setNum(nullElements)}
 		
 		// 更新格子显示数字
 		setNumTovalue();
@@ -74,6 +79,8 @@ document.body.addEventListener("keypress",function(e){
 		
 		// 更新颜色显示
 		setColor();
+		
+		win();
 	},animationSpeed)
 })
 
@@ -129,6 +136,9 @@ function addNum(moveOrder){
 			moveElement.value = null;
 		}
 		
+		if(moveMessage[1].value > maxNum){
+			maxNum = moveMessage[1].value;
+		}
 		// 设置延迟，等待动画完成后,
 		// 1. 清空移动格子的动画时长属性,以便在清除动画时，格子会瞬移回去;
 		// 2. 清空移动格子的动画;
@@ -184,18 +194,23 @@ function getMoveStep(moveElement,moveELementIndex,moveOrder){
 	
 	
 }
-// 每次移动过后，随机生成一个数
-function setNum(){
-	// 先获取所有没数字的格子
-	emptyELements=[];
+function getEmptyElements(){
+	// 获取所有没数字的格子
+	let emptyELements=[];
 	for (let i = 0; i < allElements.length; i++) {
 		if(!allElements[i].value){
 			emptyELements.push(allElements[i])
 		}
 	}
+	return emptyELements;
+}
+
+// 每次移动过后，随机生成一个数
+function setNum(emptyELements){
 	// 随机选择一个空格子，随机在里面填2或4
 	let ranEl = Math.floor(Math.random()*emptyELements.length);
 	let ranNum = Math.floor(Math.random()*20);
+	
 	if(ranNum<=1){
 		emptyELements[ranEl].value=4;
 	}else{
@@ -275,4 +290,13 @@ function getFirstElementPosition(el1){
 		return [el1, el2]
 	}
 	return getFirstElementPosition(el2)
+}
+
+function win(){
+	setTimeout(function(){
+		if(maxNum >= 2048){
+			alert("You win!");
+			location.reload();
+		}
+	},100)
 }
